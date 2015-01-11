@@ -1,7 +1,12 @@
 from django.contrib.auth.models import User
 from rest_framework import viewsets
-from passwordsafe.serializers import UserSerializer, ProjectSerializer, CredentialSerializer
-from passwordsafe.models import Project, Credential
+
+from passwordsafe.serializers import UserSerializer
+from passwordsafe.serializers import ProjectSerializer
+from passwordsafe.serializers import CredentialSerializer
+
+from passwordsafe.models import Project
+from passwordsafe.models import Credential
 
 
 class UserViewSet(viewsets.ModelViewSet):

@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.contrib.auth.models import User
 
 
@@ -7,7 +6,8 @@ class Project(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
 
-    owners = models.ManyToManyField(User, blank=False, null=False, related_name='projects')
+    owners = models.ManyToManyField(User, blank=False, null=False,
+                                    related_name='projects')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -27,7 +27,8 @@ class Credential(models.Model):
     private_key = models.TextField(blank=True)
     public_key = models.TextField(blank=True)
 
-    project = models.ForeignKey(Project, blank=False, null=False, related_name='credentials')
+    project = models.ForeignKey(Project, blank=False, null=False,
+                                related_name='credentials')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
