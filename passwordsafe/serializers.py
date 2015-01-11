@@ -15,7 +15,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'projects')
+        fields = ('url', 'username', 'is_superuser', 'email', 'projects')
 
 
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
