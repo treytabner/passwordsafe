@@ -10,18 +10,39 @@ from passwordsafe.models import Credential
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated():
+            if user.is_superuser:
+                return self.queryset
+            else:
+                return User.objects.filter(id=user.id)
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated():
+            if user.is_superuser:
+                return self.queryset
+            else:
+                return Project.objects.filter(owners=user)
+
 
 class CredentialViewSet(viewsets.ModelViewSet):
     queryset = Credential.objects.all()
     serializer_class = CredentialSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated():
+            if user.is_superuser:
+                return self.queryset
+            else:
+                return Credential.objects.filter(project__owners=user)
