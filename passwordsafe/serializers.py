@@ -1,24 +1,30 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from passwordsafe.models import Project, Credential
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    projects = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='project-detail'
+    )
+
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups')
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ('url', 'name')
+        fields = ('url', 'username', 'email', 'projects')
 
 
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
+    credentials = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='credential-detail'
+    )
+
     class Meta:
         model = Project
-        #fields = ('url', 'username', 'email', 'groups')
+        fields = ('url', 'name', 'description', 'owners', 'created_at', 'updated_at', 'credentials')
 
 
 class CredentialSerializer(serializers.HyperlinkedModelSerializer):

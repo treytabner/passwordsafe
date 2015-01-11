@@ -10,7 +10,6 @@ router = routers.DefaultRouter()
 router.register(r'projects', views.ProjectViewSet)
 router.register(r'credentials', views.CredentialViewSet)
 router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
 
 
 urlpatterns = patterns('',
