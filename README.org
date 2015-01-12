@@ -1,3 +1,13 @@
 * PasswordSafe
 
 Web-based credentials management application with RESTful API and LDAP integration
+
+** Encrypted fields
+
+In order to use encrypted fields, you'll need to setup the Keyczar keys:
+
+#+BEGIN_SRC bash
+$ mkdir fieldkeys
+$ keyczart create --location=fieldkeys --purpose=crypt
+$ keyczart addkey --location=fieldkeys --status=primary --size=256
+#+END_SRC
