@@ -19,6 +19,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '4r#^ue!^e15j)&j0t!8z82qkmdq$k+7(+6$r*3#^gow+pi2ge7'
 
+# Directory for encryption keys for model fields
+ENCRYPTED_FIELDS_KEYDIR = os.path.join(BASE_DIR, 'fieldkeys')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
