@@ -31,6 +31,20 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
                   'created_at', 'updated_at', 'credentials')
 
 
+class OwnedProjectValidator:
+    def set_context(self, serializer_field):
+        self.user = serializer_field.context['request'].user
+
+    def __call__(self, credential):
+        project = credential.get('project')
+        if self.user not in project.owners.all():
+            message = 'Project must be owned by user.'
+            raise serializers.ValidationError(message)
+
+
 class CredentialSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Credential
+        validators = [
+            OwnedProjectValidator()
+        ]

@@ -22,10 +22,13 @@ class Credential(models.Model):
     username = models.CharField(max_length=200, blank=True)
     password = models.CharField(max_length=200, blank=True)
     hostname = models.CharField(max_length=200, blank=True)
-    port = models.IntegerField(blank=True, null=True)
+    port = models.CharField(max_length=200, blank=True)
+    protocol = models.CharField(max_length=200, blank=True)
+    command = models.CharField(max_length=200, blank=True)
     uri = models.CharField(max_length=200, blank=True)
     private_key = models.TextField(blank=True)
     public_key = models.TextField(blank=True)
+    script = models.TextField(blank=True)
 
     project = models.ForeignKey(Project, blank=False, null=False,
                                 related_name='credentials')
