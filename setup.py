@@ -13,7 +13,8 @@ setup(
     packages=['passwordsafe'],
     include_package_data=True,
     license='AGPL-3',
-    description='Web-based credentials management application with RESTful API and LDAP integration',
+    description='Web-based credentials management application '
+                'with RESTful API and LDAP integration',
     long_description=README,
     url='https://github.com/treytabner/passwordsafe',
     author='Trey Tabner',
