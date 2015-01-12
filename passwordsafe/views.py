@@ -1,5 +1,8 @@
 from django.contrib.auth.models import User
+
 from rest_framework import viewsets
+
+from passwordsafe.permissions import IsSuperUserOrReadOnly
 
 from passwordsafe.serializers import UserSerializer
 from passwordsafe.serializers import ProjectSerializer
@@ -12,6 +15,7 @@ from passwordsafe.models import Credential
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (IsSuperUserOrReadOnly, )
 
     def get_queryset(self):
         user = self.request.user
