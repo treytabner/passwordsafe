@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class Project(models.Model):
     name = models.CharField(max_length=200)
+    url = models.CharField(max_length=200, blank=True)
     description = models.TextField(blank=True)
 
     owners = models.ManyToManyField(User, blank=False, null=False,
@@ -25,7 +26,7 @@ class Credential(models.Model):
     port = models.CharField(max_length=200, blank=True)
     protocol = models.CharField(max_length=200, blank=True)
     command = models.CharField(max_length=200, blank=True)
-    uri = models.CharField(max_length=200, blank=True)
+    url = models.CharField(max_length=200, blank=True)
     private_key = models.TextField(blank=True)
     public_key = models.TextField(blank=True)
     script = models.TextField(blank=True)

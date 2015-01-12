@@ -1,9 +1,13 @@
 from django.contrib.auth.models import User
 
 from rest_framework import serializers
+from rest_framework.settings import api_settings
 
 from passwordsafe.models import Project
 from passwordsafe.models import Credential
+
+
+api_settings.URL_FIELD_NAME = 'self'
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,7 +19,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ('url', 'username', 'is_superuser', 'email', 'projects')
+        fields = ('self', 'username', 'is_superuser', 'email', 'projects')
 
 
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
@@ -27,7 +31,7 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Project
-        fields = ('url', 'name', 'description', 'owners',
+        fields = ('self', 'name', 'url', 'description', 'owners',
                   'created_at', 'updated_at', 'credentials')
 
 
