@@ -27,6 +27,16 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'passwordsafe.context_processor',
+)
 
 ALLOWED_HOSTS = []
 
@@ -42,6 +52,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'passwordsafe',
     'rest_framework',
+    #'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -52,6 +63,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'passwordsafe.urls'
