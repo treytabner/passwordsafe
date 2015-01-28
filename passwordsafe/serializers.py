@@ -11,28 +11,18 @@ api_settings.URL_FIELD_NAME = 'self'
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    projects = serializers.HyperlinkedRelatedField(
-        many=True,
-        read_only=True,
-        view_name='project-detail'
-    )
-
     class Meta:
         model = User
         fields = ('self', 'username', 'is_superuser', 'email', 'projects')
+        depth = 1
 
 
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
-    credentials = serializers.HyperlinkedRelatedField(
-        many=True,
-        read_only=True,
-        view_name='credential-detail'
-    )
-
     class Meta:
         model = Project
         fields = ('self', 'name', 'url', 'description', 'owners',
                   'created_at', 'updated_at', 'credentials')
+        depth = 1
 
 
 class OwnedProjectValidator:
@@ -52,3 +42,4 @@ class CredentialSerializer(serializers.HyperlinkedModelSerializer):
         validators = [
             OwnedProjectValidator()
         ]
+        depth = 1
